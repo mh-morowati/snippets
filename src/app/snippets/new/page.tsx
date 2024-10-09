@@ -1,4 +1,21 @@
+import {db} from '@/db';
+
 function SnippetCreatePage() {
+    async function createSnippet(formData: FormData) {
+        //this need tobe a server action!
+        'use server'
+        //check the users inputs and make they're valid
+        const title =  formData.get('title') as string;
+        const code = formData.get('code') as string;
+        //create a new record in the database
+      const snippet =  await db.snippet.create({
+            data: {
+                title,
+                code
+            }
+        })
+        //redirect the user back to the root route
+    }
     return ( <form action="">
         <h3 className="font-bold m-3">Create a Snippet</h3>
         <div className="flex flex-col gap-4">
